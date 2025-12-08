@@ -1,0 +1,166 @@
+
+# 🧹 System Cleaning & Organization Guide
+
+This document describes how I organize, clean, and maintain my Linux home directory.  
+It exists to prevent clutter, lost files, and security risks in the future.
+
+---
+
+## ✅ Standard Folder Structure
+
+My system always follows this layout:
+
+```
+
+AI/
+Apps/
+Archives/
+Configs/
+Desktop/
+Documents/
+Downloads/
+Media/
+Projects/
+Scripts/
+Temp/
+LICENSE
+README.md
+
+````
+
+### Purpose of Each Folder
+
+- **AI/** → AI models, datasets, notebooks, experiments  
+- **Apps/** → AppImages, extracted applications  
+- **Archives/** → Old backups, zip files, browser data  
+- **Configs/** → Config files, envs, logs  
+- **Desktop/** → Temporary working space ONLY  
+- **Documents/** → All personal, finance, legal, books  
+- **Downloads/** → Temporary inbox for new files  
+- **Media/** → Images, videos, audio  
+- **Projects/** → All development work  
+- **Scripts/** → Automation scripts & tools  
+- **Temp/** → Disposable temporary files  
+
+---
+
+## ✅ Core Rules
+
+1. **Nothing important stays in `Downloads` or `Desktop`.**
+2. **Sensitive files NEVER live on the Desktop.**
+3. **All code goes to `Projects/`.**
+4. **All media goes to `Media/`.**
+5. **All documents go to `Documents/`.**
+6. **Old or unused items go to `Archives/`.**
+7. **Temporary junk goes only to `Temp/`.**
+
+---
+
+## ✅ Weekly Maintenance Checklist
+
+Run these once a week:
+
+```bash
+# Clean temp junk
+rm -rf ~/Temp/*
+
+# Clean cache
+rm -rf ~/.cache/*
+
+# Review downloads
+ls ~/Downloads
+
+# Review desktop
+ls ~/Desktop
+````
+
+---
+
+## ✅ Downloads Auto-Sort (Manual Command)
+
+This safely sorts common file types:
+
+```bash
+mkdir -p ~/Documents/{Finance,Personal,Archives,Books} ~/Media ~/Projects && \
+mv ~/Downloads/*.pdf ~/Documents/Finance/ 2>/dev/null && \
+mv ~/Downloads/*.xls ~/Documents/Finance/ 2>/dev/null && \
+mv ~/Downloads/*.py ~/Projects/ 2>/dev/null && \
+mv ~/Downloads/*/ ~/Projects/ 2>/dev/null && \
+mv ~/Downloads/*.mp3 ~/Downloads/*.mp4 ~/Downloads/*.mkv ~/Media/ 2>/dev/null && \
+mv ~/Downloads/*.jpeg ~/Downloads/*.jpg ~/Downloads/*.png ~/Media/ 2>/dev/null && \
+mv ~/Downloads/*.zip ~/Downloads/*.tar ~/Downloads/*.gz ~/Documents/Archives/ 2>/dev/null
+```
+
+---
+
+## ✅ Desktop Emergency Cleanup
+
+If the Desktop gets messy:
+
+```bash
+mv ~/Desktop/* ~/Temp/
+```
+
+Then manually review `Temp/`.
+
+---
+
+## ✅ Security Rules (IMPORTANT)
+
+Never leave these in open folders:
+
+* Aadhaar / IDs
+* OTPs
+* Tokens
+* Bank files
+
+Always keep them inside:
+
+```
+~/Documents/Passwords/
+```
+
+Lock the folder:
+
+```bash
+chmod -R 700 ~/Documents/Passwords
+```
+
+---
+
+## ✅ Before Deleting Anything
+
+Always test with:
+
+```bash
+ls file_or_folder
+du -sh file_or_folder
+```
+
+Never use `rm -rf` without verifying.
+
+---
+
+## ✅ When Storage Feels Full
+
+Find large files:
+
+```bash
+du -ah ~ | sort -hr | head -50
+```
+
+---
+
+## ✅ Golden Rule
+
+> **Organize first. Delete last. Automate always.**
+
+---
+
+## ✅ Last Updated
+
+Keep this file updated whenever:
+
+* Folder structure changes
+* Automation scripts change
+* New categories are added
